@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EDU HELP</title>
+    <style>
+        /* Base Reset */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            height: 100%;
+            background-color: white;
+            overflow-x: hidden;
+        }
+
+        /* 1. Loading Screen */
+        #loader {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: #007bff;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            z-index: 9999;
+            transition: opacity 0.8s ease-out, visibility 0.8s ease-out;
+        }
+
+        .loader-logo-container {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            width: 150px; height: 150px; background-color: white; border-radius: 20px;
+            margin-bottom: 40px; animation: pulseLogo 2s infinite ease-in-out;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        @keyframes pulseLogo { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+
+        .edu-container { font-size: 38px; font-weight: 800; color: #007bff; display: flex; align-items: center; gap: 10px; line-height: 1; }
+        .edu-container .cap-icon { font-size: 40px; color: white; background-color: #007bff; border-radius: 50%; padding: 5px; display: flex; justify-content: center; align-items: center; }
+        .help-text { font-size: 38px; font-weight: 800; color: #f7b731; margin-top: 5px; line-height: 1; }
+
+        .loading-bar-container { width: 200px; height: 8px; background-color: rgba(255, 255, 255, 0.2); border-radius: 4px; overflow: hidden; }
+        .loading-bar { width: 0%; height: 100%; background-color: white; border-radius: 4px; animation: fillBar 8s linear forwards; }
+
+        @keyframes fillBar { 0% { width: 0%; } 100% { width: 100%; } }
+
+        /* Common Page Layout */
+        .page { display: none; height: 100vh; flex-direction: column; }
+        header {
+            background-color: white; height: 65px; border-bottom: 1px solid #eaeaea;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 15px; position: fixed; top: 0; width: 100%; box-sizing: border-box; z-index: 10;
+        }
+
+        .header-logo-container .edu-container { font-size: 20px; gap: 5px; }
+        .header-logo-container .edu-container .cap-icon { font-size: 20px; padding: 2px; }
+        .header-logo-container .help-text { font-size: 20px; margin-top: 0; margin-left: 5px; }
+        .three-dot-menu { font-size: 26px; color: #555; }
+
+        .content-body { margin-top: 65px; flex-grow: 1; padding: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+
+        /* Welcome Page Styles */
+        .btn-container { width: 100%; max-width: 300px; margin-top: 30px; }
+        .btn { width: 100%; padding: 15px; margin: 10px 0; border: none; border-radius: 10px; font-size: 18px; font-weight: bold; cursor: pointer; transition: 0.2s; }
+        .btn-register { background-color: #8e44ad; color: white; }
+        .btn-signin { background-color: #f1c40f; color: #333; }
+        .or-text { margin: 10px 0; color: #888; }
+
+        /* Form Page Styles */
+        .form-box { background: #f9f9f9; padding: 20px; border-radius: 15px; width: 100%; max-width: 320px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .form-box h2 { color: #333; margin-bottom: 20px; }
+        .input-group { margin-bottom: 15px; text-align: left; }
+        .input-group label { display: block; margin-bottom: 5px; font-size: 14px; color: #666; }
+        .input-group input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 16px; }
+
+    </style>
+</head>
+<body>
+
+    <div id="loader">
+        <div class="loader-logo-container">
+            <div class="edu-container"><span class="cap-icon">🎓</span><span>EDU</span></div>
+            <div class="help-text">HELP</div>
+        </div>
+        <div class="loading-bar-container"><div class="loading-bar"></div></div>
+    </div>
+
+    <div id="welcome-page" class="page">
+        <header>
+            <div class="header-logo-container">
+                <div class="edu-container"><span class="cap-icon">🎓</span><span>EDU</span></div>
+                <div class="help-text">HELP</div>
+            </div>
+            <div class="three-dot-menu">&#8942;</div>
+        </header>
+        <div class="content-body">
+            <h1 style="color: #333; font-size: 32px;">Welcome!</h1>
+            <div class="btn-container">
+                <button class="btn btn-register" onclick="showPage('register-page')">Register করো</button>
+                <div class="or-text">অথবা</div>
+                <button class="btn btn-signin" onclick="showPage('signin-page')">Sign in</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="register-page" class="page">
+        <header><div class="header-logo-container"><div class="edu-container"><span class="cap-icon">🎓</span><span>EDU</span></div><div class="help-text">HELP</div></div></header>
+        <div class="content-body">
+            <div class="form-box">
+                <h2>Information Box</h2>
+                <div class="input-group"><label>Name</label><input type="text" id="reg-name" placeholder="Enter name"></div>
+                <div class="input-group"><label>Class</label><input type="text" id="reg-class" placeholder="Enter class"></div>
+                <div class="input-group"><label>Number</label><input type="number" id="reg-num" placeholder="Enter number"></div>
+                <div class="input-group"><label>Pin</label><input type="password" id="reg-pin" placeholder="Enter pin"></div>
+                <button class="btn btn-register" onclick="generateOTP()">Register Option</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="otp-page" class="page">
+        <header><div class="header-logo-container"><div class="edu-container"><span class="cap-icon">🎓</span><span>EDU</span></div><div class="help-text">HELP</div></div></header>
+        <div class="content-body">
+            <div class="form-box">
+                <h2>Confirm OTP</h2>
+                <p style="color: #666; font-size: 14px; margin-bottom: 15px;">আপনার নাম্বারে পাঠানো ৪ ডিজিট কোডটি দিন</p>
+                <div class="input-group">
+                    <input type="number" id="otp-input" placeholder="Enter 4-digit OTP" style="text-align: center; font-size: 24px; letter-spacing: 5px;">
+                </div>
+                <button class="btn btn-register" onclick="verifyOTP()">Confirm Done</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="signin-page" class="page">
+        <header><div class="header-logo-container"><div class="edu-container"><span class="cap-icon">🎓</span><span>EDU</span></div><div class="help-text">HELP</div></div></header>
+        <div class="content-body">
+            <div class="form-box">
+                <h2>Log in</h2>
+                <div class="input-group"><label>Number</label><input type="number" id="login-num" placeholder="Registered number"></div>
+                <div class="input-group"><label>Pin</label><input type="password" id="login-pin" placeholder="Registered pin"></div>
+                <button class="btn btn-signin" onclick="handleLogin()">Log in</button>
+                <p id="login-error" style="color: red; font-size: 12px; margin-top: 10px; display: none;">Wrong number or pin!</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="construction-page" class="page">
+        <div class="content-body">
+            <h1 style="font-size: 50px;">🏗️</h1>
+            <h2 style="color: #333;">App is Under Construction</h2>
+            <p style="color: #888;">Stay tuned for updates!</p>
+        </div>
+    </div>
+
+    <script>
+        let userData = { name: "", class: "", number: "", pin: "" };
+        let generatedOTP = "";
+
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
+            document.getElementById(pageId).style.display = 'flex';
+        }
+
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('loader').style.opacity = '0';
+                document.getElementById('loader').style.visibility = 'hidden';
+                showPage('welcome-page');
+            }, 8000); 
+        });
+
+        // Step 1: Generate OTP and move to OTP page
+        function generateOTP() {
+            const name = document.getElementById('reg-name').value;
+            const cls = document.getElementById('reg-class').value;
+            const num = document.getElementById('reg-num').value;
+            const pin = document.getElementById('reg-pin').value;
+
+            if(name && cls && num && pin) {
+                // Temporary data store
+                userData = { name, class: cls, number: num, pin };
+                
+                // 4 Digit Random OTP
+                generatedOTP = Math.floor(1000 + Math.random() * 9000).toString();
+                
+                alert("Security Code (OTP): " + generatedOTP); // Showing OTP for testing
+                showPage('otp-page');
+            } else {
+                alert("সবগুলো বক্স পূরণ করুন!");
+            }
+        }
+
+        // Step 2: Verify OTP
+        function verifyOTP() {
+            const inputOTP = document.getElementById('otp-input').value;
+            if(inputOTP === generatedOTP) {
+                alert("Register Done ✅");
+                showPage('welcome-page');
+            } else {
+                alert("ভুল OTP! আবার চেষ্টা করুন।");
+            }
+        }
+
+        function handleLogin() {
+            const inputNum = document.getElementById('login-num').value;
+            const inputPin = document.getElementById('login-pin').value;
+
+            if(inputNum === userData.number && inputPin === userData.pin && userData.number !== "") {
+                showPage('construction-page');
+            } else {
+                document.getElementById('login-error').style.display = 'block';
+            }
+        }
+    </script>
+</body>
+  </html>
